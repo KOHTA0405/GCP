@@ -1,0 +1,29 @@
+{
+  "kind": "storage#object",
+  "id": "bucket-name/folder1/filename.xlsx/1234567890123456",
+  "selfLink": "https://www.googleapis.com/storage/v1/b/bucket-name/o/folder1/filename.xlsx",
+  "name": "folder1/filename.xlsx",
+  "bucket": "bucket-name",
+  "generation": "1234567890123456",
+  "metageneration": "1",
+  "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "timeCreated": "2022-01-01T00:00:00.000Z",
+  "updated": "2022-01-01T00:00:00.000Z",
+  "timeDeleted": null,
+  "timeStorageClassUpdated": null,
+  "size": "12345",
+  "md5Hash": "abc123...",
+  "crc32c": "xyz456...",
+  "contentLanguage": "en",
+  "metadata": {
+    "project": "my-project",
+    "user-id": "123456"
+  },
+  "eventTime": "2022-01-01T00:00:00.000Z",
+  "eventType": "google.storage.object.finalize",
+  "notificationConfig": {
+    "notificationId": "notification-id-123456",
+    "topic": "projects/my-project/topics/gcs-bucket-notifications",
+    "payloadFormat": "JSON_API_V1"
+  }
+}
