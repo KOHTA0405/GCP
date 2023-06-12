@@ -1,0 +1,20 @@
+create table if not exists `dev_dwh.users` (
+    userid int not null,
+    username string(8),
+    firstname string(30),
+    lastname string(30),
+    city string(30),
+    state string(2),
+    email string(100),
+    phone string(14),
+    likesports bool,
+    liketheatre bool,
+    likeconcerts bool,
+    likejazz bool,
+    likeclassical bool,
+    likeopera bool,
+    likerock bool,
+    likevegas bool,
+    likebroadway bool,
+    likemusicals bool
+);
