@@ -6,5 +6,6 @@ create table if not exists `dev_dwh.date` (
     month string(5) not null,
     qtr string(5) not null,
     year int not null,
-    holiday bool default Null
+    holiday bool default null,
+    last_updated_at datetime default current_datetime('Asia/Tokyo')
 );

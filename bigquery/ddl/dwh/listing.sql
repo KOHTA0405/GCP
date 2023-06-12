@@ -6,5 +6,6 @@ create table if not exists `dev_dwh.listing` (
     numtickets int not null,
     priceperticket numeric,
     totalprice numeric,
-    listtime datetime
+    listtime datetime,
+    last_updated_at datetime default current_datetime('Asia/Tokyo')
 );

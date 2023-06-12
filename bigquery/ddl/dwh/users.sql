@@ -16,5 +16,6 @@ create table if not exists `dev_dwh.users` (
     likerock bool,
     likevegas bool,
     likebroadway bool,
-    likemusicals bool
+    likemusicals bool,
+    last_updated_at datetime default current_datetime('Asia/Tokyo')
 );

@@ -8,5 +8,6 @@ create table if not exists `dev_dwh.sales` (
     qtysold int not null,
     pricepaid numeric,
     commission numeric,
-    saletime datetime
+    saletime datetime,
+    last_updated_at datetime default current_datetime('Asia/Tokyo')
 );
