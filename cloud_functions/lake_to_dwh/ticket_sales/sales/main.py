@@ -27,10 +27,25 @@ def load_data(request):
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
-    job_config = bigquery.LoadJobConfig()
-    job_config.autodetect = True
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("salesid", "integer"),
+            bigquery.SchemaField("listid", "integer"),
+            bigquery.SchemaField("sellerid", "integer"),
+            bigquery.SchemaField("buyerid", "integer"),
+            bigquery.SchemaField("eventid", "integer"),
+            bigquery.SchemaField("dateid", "integer"),
+            bigquery.SchemaField("qtysold", "integer"),
+            bigquery.SchemaField("pricepaid", "numeric"),
+            bigquery.SchemaField("commission", "numeric"),
+            bigquery.SchemaField("saletime", "datetime"),
+        ],
+        skip_leading_rows=1,
+    )
+    job_config.autodetect = False
     job_config.source_format = bigquery.SourceFormat.CSV
     job_config.write_disposition = "WRITE_APPEND"
+    job_config.schema_update_options = "ALLOW_FIELD_RELAXATION"
 
     def target_file_check():
         # 特定のフォルダのcsvファイル数のみをカウントするためにリスト化する
