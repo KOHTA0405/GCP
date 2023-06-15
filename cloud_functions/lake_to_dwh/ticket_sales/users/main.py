@@ -16,22 +16,37 @@ def load_data(request):
     bucket = storage_client.get_bucket(bucket_name)
 
     # ジョブごとに固有のインプット情報
-    folder_path = "test/hoge/"
-    file_prefix = "hoge"
+    folder_path = "ticket_sales/users/"
+    file_prefix = "users"
 
     # ディレクトリ配下のオブジェクト一覧を取得する
     objects = bucket.list_blobs(prefix=folder_path)
 
     dataset_id = f"{os.environ.get('ENV')}_dwh"
-    table_id = "hoge"
+    table_id = "users"
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
     job_config = bigquery.LoadJobConfig(
         schema=[
-            bigquery.SchemaField("id", "integer"),
-            bigquery.SchemaField("name", "string"),
-            bigquery.SchemaField("quantity", "numeric"),
+            bigquery.SchemaField("userid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("username", "string"),
+            bigquery.SchemaField("firstname", "string"),
+            bigquery.SchemaField("lastname", "string"),
+            bigquery.SchemaField("city", "string"),
+            bigquery.SchemaField("state", "string"),
+            bigquery.SchemaField("email", "string"),
+            bigquery.SchemaField("phone", "string"),
+            bigquery.SchemaField("likesports", "boolean"),
+            bigquery.SchemaField("liketheatre", "boolean"),
+            bigquery.SchemaField("likeconcerts", "boolean"),
+            bigquery.SchemaField("likejazz", "boolean"),
+            bigquery.SchemaField("likeclassical", "boolean"),
+            bigquery.SchemaField("likeopera", "boolean"),
+            bigquery.SchemaField("likerock", "boolean"),
+            bigquery.SchemaField("likevegas", "boolean"),
+            bigquery.SchemaField("likebroadway", "boolean"),
+            bigquery.SchemaField("likemusicals", "boolean"),
         ],
         skip_leading_rows=1,
     )

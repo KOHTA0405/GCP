@@ -16,22 +16,24 @@ def load_data(request):
     bucket = storage_client.get_bucket(bucket_name)
 
     # ジョブごとに固有のインプット情報
-    folder_path = "test/hoge/"
-    file_prefix = "hoge"
+    folder_path = "ticket_sales/venue/"
+    file_prefix = "venue"
 
     # ディレクトリ配下のオブジェクト一覧を取得する
     objects = bucket.list_blobs(prefix=folder_path)
 
     dataset_id = f"{os.environ.get('ENV')}_dwh"
-    table_id = "hoge"
+    table_id = "venue"
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
     job_config = bigquery.LoadJobConfig(
         schema=[
-            bigquery.SchemaField("id", "integer"),
-            bigquery.SchemaField("name", "string"),
-            bigquery.SchemaField("quantity", "numeric"),
+            bigquery.SchemaField("venueid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("venuename", "string"),
+            bigquery.SchemaField("venuecity", "string"),
+            bigquery.SchemaField("venuestate", "string"),
+            bigquery.SchemaField("venueseats", "integer"),
         ],
         skip_leading_rows=1,
     )

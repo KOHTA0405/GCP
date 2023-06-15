@@ -164,3 +164,12 @@ cython_debug/
 
 # serverless
 serverless/
+
+# .vscode
+.vscode/
+
+# sample_data
+sample_data/
+
+# data_model.xlsx
+data_model.xlsx

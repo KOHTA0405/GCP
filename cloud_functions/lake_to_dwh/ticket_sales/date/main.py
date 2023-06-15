@@ -16,22 +16,27 @@ def load_data(request):
     bucket = storage_client.get_bucket(bucket_name)
 
     # ジョブごとに固有のインプット情報
-    folder_path = "test/hoge/"
-    file_prefix = "hoge"
+    folder_path = "ticket_sales/date/"
+    file_prefix = "date"
 
     # ディレクトリ配下のオブジェクト一覧を取得する
     objects = bucket.list_blobs(prefix=folder_path)
 
     dataset_id = f"{os.environ.get('ENV')}_dwh"
-    table_id = "hoge"
+    table_id = "date"
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
     job_config = bigquery.LoadJobConfig(
         schema=[
-            bigquery.SchemaField("id", "integer"),
-            bigquery.SchemaField("name", "string"),
-            bigquery.SchemaField("quantity", "numeric"),
+            bigquery.SchemaField("dateid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("caldate", "date", mode="REQUIRED"),
+            bigquery.SchemaField("day", "string", mode="REQUIRED"),
+            bigquery.SchemaField("week", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("month", "string", mode="REQUIRED"),
+            bigquery.SchemaField("qtr", "string", mode="REQUIRED"),
+            bigquery.SchemaField("year", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("holiday", "bool"),
         ],
         skip_leading_rows=1,
     )
