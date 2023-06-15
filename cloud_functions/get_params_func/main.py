@@ -42,7 +42,6 @@ def get_params(event, context):
             data = json.dumps(dict_data).encode("utf-8")
             future = publisher.publish(topic_path, data=data)
             print(f"後続ワークフロー：{doc.to_dict().get('following_workflow_name')}")
-            # return doc.to_dict().get("following_function")
             break
         else:
             continue
