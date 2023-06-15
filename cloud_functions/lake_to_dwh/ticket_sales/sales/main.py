@@ -29,13 +29,13 @@ def load_data(request):
     # Set Load Config
     job_config = bigquery.LoadJobConfig(
         schema=[
-            bigquery.SchemaField("salesid", "integer"),
-            bigquery.SchemaField("listid", "integer"),
-            bigquery.SchemaField("sellerid", "integer"),
-            bigquery.SchemaField("buyerid", "integer"),
-            bigquery.SchemaField("eventid", "integer"),
-            bigquery.SchemaField("dateid", "integer"),
-            bigquery.SchemaField("qtysold", "integer"),
+            bigquery.SchemaField("salesid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("listid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("sellerid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("buyerid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("eventid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("dateid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("qtysold", "integer", mode="REQUIRED"),
             bigquery.SchemaField("pricepaid", "numeric"),
             bigquery.SchemaField("commission", "numeric"),
             bigquery.SchemaField("saletime", "datetime"),
@@ -45,7 +45,6 @@ def load_data(request):
     job_config.autodetect = False
     job_config.source_format = bigquery.SourceFormat.CSV
     job_config.write_disposition = "WRITE_APPEND"
-    job_config.schema_update_options = "ALLOW_FIELD_RELAXATION"
 
     def target_file_check():
         # 特定のフォルダのcsvファイル数のみをカウントするためにリスト化する

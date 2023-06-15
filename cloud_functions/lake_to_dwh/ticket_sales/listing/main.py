@@ -27,8 +27,20 @@ def load_data(request):
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
-    job_config = bigquery.LoadJobConfig()
-    job_config.autodetect = True
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("listid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("sellerid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("eventid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("dateid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("numtickets", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("priceperticket", "numeric"),
+            bigquery.SchemaField("totalprice", "numeric"),
+            bigquery.SchemaField("listtime", "datetime"),
+        ],
+        skip_leading_rows=1,
+    )
+    job_config.autodetect = False
     job_config.source_format = bigquery.SourceFormat.CSV
     job_config.write_disposition = "WRITE_APPEND"
 

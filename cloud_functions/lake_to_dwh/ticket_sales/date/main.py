@@ -27,8 +27,20 @@ def load_data(request):
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
-    job_config = bigquery.LoadJobConfig()
-    job_config.autodetect = True
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("dateid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("caldate", "date", mode="REQUIRED"),
+            bigquery.SchemaField("day", "string", mode="REQUIRED"),
+            bigquery.SchemaField("week", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("month", "string", mode="REQUIRED"),
+            bigquery.SchemaField("qtr", "string", mode="REQUIRED"),
+            bigquery.SchemaField("year", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("holiday", "bool"),
+        ],
+        skip_leading_rows=1,
+    )
+    job_config.autodetect = False
     job_config.source_format = bigquery.SourceFormat.CSV
     job_config.write_disposition = "WRITE_APPEND"
 

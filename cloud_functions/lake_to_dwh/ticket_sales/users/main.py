@@ -27,8 +27,30 @@ def load_data(request):
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
-    job_config = bigquery.LoadJobConfig()
-    job_config.autodetect = True
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("userid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("username", "string"),
+            bigquery.SchemaField("firstname", "string"),
+            bigquery.SchemaField("lastname", "string"),
+            bigquery.SchemaField("city", "string"),
+            bigquery.SchemaField("state", "string"),
+            bigquery.SchemaField("email", "string"),
+            bigquery.SchemaField("phone", "string"),
+            bigquery.SchemaField("likesports", "boolean"),
+            bigquery.SchemaField("liketheatre", "boolean"),
+            bigquery.SchemaField("likeconcerts", "boolean"),
+            bigquery.SchemaField("likejazz", "boolean"),
+            bigquery.SchemaField("likeclassical", "boolean"),
+            bigquery.SchemaField("likeopera", "boolean"),
+            bigquery.SchemaField("likerock", "boolean"),
+            bigquery.SchemaField("likevegas", "boolean"),
+            bigquery.SchemaField("likebroadway", "boolean"),
+            bigquery.SchemaField("likemusicals", "boolean"),
+        ],
+        skip_leading_rows=1,
+    )
+    job_config.autodetect = False
     job_config.source_format = bigquery.SourceFormat.CSV
     job_config.write_disposition = "WRITE_APPEND"
 

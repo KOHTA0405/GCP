@@ -27,8 +27,16 @@ def load_data(request):
     client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     # Set Load Config
-    job_config = bigquery.LoadJobConfig()
-    job_config.autodetect = True
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("catid", "integer", mode="REQUIRED"),
+            bigquery.SchemaField("catgroup", "string"),
+            bigquery.SchemaField("catname", "string"),
+            bigquery.SchemaField("catdesc", "string"),
+        ],
+        skip_leading_rows=1,
+    )
+    job_config.autodetect = False
     job_config.source_format = bigquery.SourceFormat.CSV
     job_config.write_disposition = "WRITE_APPEND"
 
