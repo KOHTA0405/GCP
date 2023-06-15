@@ -11,17 +11,8 @@ functions_client = functions_v1.CloudFunctionsServiceClient()
 
 def invoke_load_job(event, context):
     pubsub_message = base64.b64decode(event["data"]).decode("utf-8")
-    print(f"event: {event}")
-    print(f"eventのデータ型: {type(event)}")
-    print(f"event['data']: {event['data']}")
-    print(f"event['data']のデータ型: {type(event['data'])}")
-    # print(f"following_function_name: {event['data'].get('following_function_name')}") <- エラー
-    print(f"pubub_message: {pubsub_message}")
-    print(f"pubub_messageのデータ型: {type(pubsub_message)}")
-    print(f"pubub_messageのdict変換: {json.loads(pubsub_message)}")
-    print(
-        f"dictにして、following_workflow_nameを取得: {json.loads(pubsub_message).get('following_workflow_name')[0]}"
-    )
+
+    # pubsubから、実行する後続のworkflow_nameを取得
     workflow_name = json.loads(pubsub_message).get("following_workflow_name")[0]
 
     # Set up API clients.
