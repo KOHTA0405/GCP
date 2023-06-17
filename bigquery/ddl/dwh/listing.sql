@@ -7,5 +7,8 @@ create table if not exists `dev_dwh.listing` (
     priceperticket numeric,
     totalprice numeric,
     listtime datetime,
-    last_updated_at datetime default current_datetime('Asia/Tokyo')
-);
+    last_updated_at datetime default current_datetime('Asia/Tokyo'),
+    primary key(listid) not enforced
+)
+partition by datetime_trunc(listtime, day)
+;

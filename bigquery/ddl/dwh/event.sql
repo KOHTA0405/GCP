@@ -5,5 +5,8 @@ create table if not exists `dev_dwh.event` (
     dateid int not null,
     eventname string(200),
     starttime datetime,
-    last_updated_at datetime default current_datetime('Asia/Tokyo')
-);
+    last_updated_at datetime default current_datetime('Asia/Tokyo'),
+    primary key(eventid) not enforced
+)
+partition by datetime_trunc(starttime, day)
+;
