@@ -3,5 +3,6 @@ create table if not exists `dev_dwh.category` (
     catgroup string(10),
     catname string(10),
     catdesc string(50),
-    last_updated_at datetime default current_datetime('Asia/Tokyo')
+    last_updated_at datetime default current_datetime('Asia/Tokyo'),
+    primary key(catid) not enforced
 );

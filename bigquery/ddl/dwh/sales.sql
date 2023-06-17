@@ -9,5 +9,8 @@ create table if not exists `dev_dwh.sales` (
     pricepaid numeric,
     commission numeric,
     saletime datetime,
-    last_updated_at datetime default current_datetime('Asia/Tokyo')
-);
+    last_updated_at datetime default current_datetime('Asia/Tokyo'),
+    primary key(salesid) not enforced
+)
+partition by datetime_trunc(saletime, day)
+;

@@ -7,5 +7,6 @@ create table if not exists `dev_dwh.date` (
     qtr string(5) not null,
     year int not null,
     holiday bool default null,
-    last_updated_at datetime default current_datetime('Asia/Tokyo')
+    last_updated_at datetime default current_datetime('Asia/Tokyo'),
+    primary key(dateid) not enforced
 );
