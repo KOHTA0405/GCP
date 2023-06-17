@@ -173,3 +173,6 @@ sample_data/
 
 # data_model.xlsx
 data_model.xlsx
+
+# テーブル定義書
+bigquery/テーブル定義書/
